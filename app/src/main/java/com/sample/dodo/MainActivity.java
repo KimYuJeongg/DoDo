@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 
+
+
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -29,12 +32,31 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     ArrayList<String> list = new ArrayList<>();
 
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+
+
+
+
+
+
+
+
+
+
 
         setSupportActionBar(binding.appBarMain.toolbar);
         DrawerLayout drawer = binding.drawerLayout;
@@ -56,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         MainToDoRecyclerViewAdapter adapter = new MainToDoRecyclerViewAdapter(list) ;
         recyclerView.setAdapter(adapter) ;
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), 1));
+
+
     }
 
     void setList() {

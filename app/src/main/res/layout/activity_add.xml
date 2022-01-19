@@ -67,7 +67,7 @@
                 android:id="@+id/importanceIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_time" />
+                app:srcCompat="@drawable/ic_importance" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -108,8 +108,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
             android:onClick="setDeadLine"
             android:orientation="horizontal"
             android:paddingLeft="20dp">
@@ -130,12 +130,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:onClick="setAlarm"
-            android:visibility="invisible"
-            android:paddingLeft="20dp">
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:visibility="invisible">
 
             <ImageView
                 android:id="@+id/alarmIcon"
@@ -149,7 +149,6 @@
                 android:layout_marginStart="10dp"
                 android:text="@string/set_alarm" />
         </LinearLayout>
-
 
     </LinearLayout>
 </LinearLayout>

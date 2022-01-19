@@ -4,10 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_add.xml" value="0.38229166666666664" />
+        <entry key="..\:/DoDo/app/src/main/res/drawable/ic_alarm.xml" value="0.38229166666666664" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_calendar.xml" value="0.38229166666666664" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_fixed.xml" value="0.38229166666666664" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_time.xml" value="0.346875" />
-        <entry key="..\:/DoDo/app/src/main/res/layout/activity_add.xml" value="0.33" />
+        <entry key="..\:/DoDo/app/src/main/res/layout/activity_add.xml" value="0.25" />
         <entry key="..\:/DoDo/app/src/main/res/layout/activity_main.xml" value="0.2708333333333333" />
         <entry key="..\:/DoDo/app/src/main/res/layout/app_bar_main.xml" value="0.2708333333333333" />
         <entry key="..\:/DoDo/app/src/main/res/layout/content_main.xml" value="0.33" />

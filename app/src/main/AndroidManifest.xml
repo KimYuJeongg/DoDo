@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoDo">
         <activity
-            android:name=".DeadlineDialog"
-            android:exported="false" />
-        <activity
             android:name=".AddActivity"
             android:exported="true"
             android:theme="@style/Theme.DoDo.NoActionBar" />

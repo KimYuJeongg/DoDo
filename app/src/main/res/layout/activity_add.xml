@@ -26,7 +26,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@color/transparent"
-            android:text="완료"
+            android:text="@string/complete"
             android:textColor="@color/gray_3"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -43,7 +43,7 @@
             android:layout_marginTop="10dp"
             android:background="@color/white"
             android:gravity="top"
-            android:hint="To-Do"
+            android:hint="@string/to_do"
             android:maxLength="200"
             android:textColor="@color/gray_4" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -58,28 +58,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:onClick="setDeadLine"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp">
 
-            <ImageView
-                android:id="@+id/timeIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_time" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="마감시간 설정하기" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="20dp">
@@ -94,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="중요도 설정하기" />
+                android:text="@string/set_importance" />
 
             <Button
                 android:id="@+id/importance1"
@@ -125,5 +104,52 @@
                 android:text="3" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="20dp"
+            android:onClick="setDeadLine"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp">
+
+            <ImageView
+                android:id="@+id/timeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_time" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/set_deadline" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:onClick="setAlarm"
+            android:visibility="invisible"
+            android:paddingLeft="20dp">
+
+            <ImageView
+                android:id="@+id/alarmIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_alarm" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/set_alarm" />
+        </LinearLayout>
+
+
     </LinearLayout>
 </LinearLayout>

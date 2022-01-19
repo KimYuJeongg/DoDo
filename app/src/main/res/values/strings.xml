@@ -10,4 +10,10 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="complete">완료</string>
+    <string name="to_do">To-do</string>
+    <string name="set_importance">중요도 설정하기</string>
+    <string name="set_deadline">마감날짜 설정하기</string>
+    <string name="set_alarm">알람 설정하기</string>
 </resources>

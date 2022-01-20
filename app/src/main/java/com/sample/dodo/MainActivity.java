@@ -5,6 +5,7 @@ import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -15,15 +16,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.sample.dodo.adapter.MainToDoRecyclerViewAdapter;
+import com.sample.dodo.data.ToDo;
+import com.sample.dodo.data.ToDoDatabase;
 import com.sample.dodo.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     ArrayList<String> list = new ArrayList<>();
+    ToDoDatabase db = ToDoDatabase.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,12 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter) ;
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), 1));
 
-
+        db.toDoDao().getAll().observe(this, new Observer<List<ToDo>>() {
+            @Override
+            public void onChanged(List<ToDo> toDos) {
+                list.add(toDos.toString());
+            }
+        });
     }
 
     void setList() {

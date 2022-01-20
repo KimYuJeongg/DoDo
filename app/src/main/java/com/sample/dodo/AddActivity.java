@@ -42,7 +42,7 @@ public class AddActivity extends AppCompatActivity {
     }
 
 
-// 데이트피커 다이얼로그
+/// 데이트피커 다이얼로그
 //    Calendar c = Calendar.getInstance();
 //        int mYear = c.get(Calendar.YEAR);
 //        int mMonth = c.get(Calendar.MONTH);

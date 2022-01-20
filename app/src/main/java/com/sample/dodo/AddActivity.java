@@ -2,40 +2,47 @@ package com.sample.dodo;
 
 import android.os.Bundle;
 import android.view.View;
-
-import android.widget.Toast;
-import android.widget.EditText;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddActivity extends AppCompatActivity {
 
-
-    EditText userInput;
-    Button displayInput;
-
+    ImageButton backButton;
+    Button completeButton;
+    EditText toDoInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        backButton = findViewById(R.id.backButton);
+        completeButton = findViewById(R.id.completeButton);
+        toDoInput = findViewById(R.id.toDoInput);
 
-        userInput = (EditText) findViewById(R.id.toDoContents);
-        displayInput = (Button) findViewById(R.id.completeButton);
+    }
 
-        displayInput.setOnClickListener(new View.OnClickListener() {
+    public void completeWriting(View view) {
+        if (toDoInput.getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
+        } else {
 
-            @Override
+        }
+    }
 
-            public void onClick(View v) {
+    public void setDeadLine(View view) {
+//        TODO: DatePicker Dialog
+//        TODO: alarmLayout set visibility to visible
+//        TODO: set icon color
+    }
 
-                Toast.makeText(getApplicationContext(), userInput.getText(), Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
+    public void setAlarm(View view) {
+//        TODO: TimePicker Dialog
+//        TODO: set icon color
     }
 }
 

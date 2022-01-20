@@ -7,6 +7,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+
+import android.widget.DatePicker;
+import android.app.DatePickerDialog;
+import java.util.Calendar;
+
+
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddActivity extends AppCompatActivity {
@@ -33,6 +40,36 @@ public class AddActivity extends AppCompatActivity {
 
         }
     }
+
+
+// 데이트피커 다이얼로그
+//    Calendar c = Calendar.getInstance();
+//        int mYear = c.get(Calendar.YEAR);
+//        int mMonth = c.get(Calendar.MONTH);
+//        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+//        DatePickerDialog DatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                Date.setText(dayOfMonth+"/" + (month+1) + "/" + year);
+//            }
+//        }, mYear,mMonth, mDay);
+
+//        Date.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void OnClick(View view) {
+//               if(Date.IsClickable()) {
+//                    DatePickerDialog.show();
+//                }
+
+//    }
+
+
+
+
+
+
+
 
     public void setDeadLine(View view) {
 //        TODO: DatePicker Dialog

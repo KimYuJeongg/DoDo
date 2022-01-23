@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     ArrayList<String> list = new ArrayList<>();
-    ToDoDatabase db = ToDoDatabase.getInstance(this);
+    ToDoDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        setList();
+        db = ToDoDatabase.getInstance(this);
         RecyclerView recyclerView = findViewById(R.id.mainToDoRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
-        MainToDoRecyclerViewAdapter adapter = new MainToDoRecyclerViewAdapter(list) ;
+        MainToDoRecyclerViewAdapter adapter = new MainToDoRecyclerViewAdapter(db) ;
         recyclerView.setAdapter(adapter) ;
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), 1));
 
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         list.add("으아아아아아아ㅏㅏㅏㅏㅏㅏㅏㅏ아");
         list.add("으아ㄴ엉나ㅣ오아아아앙아");
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -16,7 +17,10 @@ public interface ToDoDao {
     List<ToDo> getAllByDate();
 
     @Insert
-    void insertAll(ToDo... toDos);
+    void insert(ToDo toDo);
+
+    @Update
+    void update(ToDo toDo);
 
     @Delete
     void delete(ToDo toDo);

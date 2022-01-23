@@ -24,7 +24,26 @@ public class ToDo {
     @ColumnInfo(name = "importance")
     public int importance;
 
+    @ColumnInfo(name = "currentState")
+    public String currentState;
+
     @ColumnInfo(name = "alarm_time")
     public Time alarmTime;
+
+    public String getContents() {
+        return todo;
+    }
+
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public int getImportance() {
+        return importance;
+    }
+
+    public String getCurrentState() {
+        return  currentState;
+    }
 
 }

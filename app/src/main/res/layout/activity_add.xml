@@ -78,30 +78,17 @@
 
             <Button
                 android:id="@+id/importance1"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:background="@color/transparent"
-                android:textColor="@color/gray_2"
-                android:textStyle="bold"
+                style="@style/importance_number_style"
                 android:text="1" />
 
             <Button
                 android:id="@+id/importance2"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:background="@color/transparent"
-                android:textColor="@color/gray_2"
-                android:textStyle="bold"
+                style="@style/importance_number_style"
                 android:text="2" />
 
             <Button
                 android:id="@+id/importance3"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:background="@color/transparent"
-                android:textColor="@color/gray_2"
-                android:textStyle="bold"
+                style="@style/importance_number_style"
                 android:text="3" />
 
         </LinearLayout>

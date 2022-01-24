@@ -5,7 +5,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.sql.Date;
 import java.sql.Time;
 
 @Entity
@@ -14,27 +13,27 @@ public class ToDo {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    @ColumnInfo(name = "todo")
+    @ColumnInfo(name = "contents")
     @NonNull
-    public String todo;
+    public String contents;
 
     @ColumnInfo(name = "deadline")
-    public Date deadline;
+    public Long deadline;
 
     @ColumnInfo(name = "importance")
     public int importance;
 
     @ColumnInfo(name = "currentState")
-    public String currentState;
+    public int currentState;
 
     @ColumnInfo(name = "alarm_time")
-    public Time alarmTime;
+    public Long alarmTime;
 
     public String getContents() {
-        return todo;
+        return contents;
     }
 
-    public Date getDeadline() {
+    public Long getDeadline() {
         return deadline;
     }
 
@@ -42,8 +41,15 @@ public class ToDo {
         return importance;
     }
 
-    public String getCurrentState() {
-        return  currentState;
+    public int getCurrentState() {
+        return currentState;
     }
 
+    public void setContents(@NonNull String contents) {
+        this.contents = contents;
+    }
+
+    public void setCurrentState(int currentState) {
+        this.currentState = currentState;
+    }
 }

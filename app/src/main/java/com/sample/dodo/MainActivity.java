@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         db.toDoDao().getAll().observe(this, new Observer<List<ToDo>>() {
             @Override
             public void onChanged(List<ToDo> toDos) {
-                list.add(toDos.toString());
+                adapter.setItem(toDos);
             }
         });
     }

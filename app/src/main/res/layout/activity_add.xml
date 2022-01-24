@@ -27,7 +27,7 @@
             android:layout_centerVertical="true"
             android:onClick="completeWriting"
             android:background="@color/transparent"
-            android:text="@string/complete"
+            android:text="@string/completion"
             android:textColor="@color/gray_3"
             android:textStyle="bold" />
     </RelativeLayout>

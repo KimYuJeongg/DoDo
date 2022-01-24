@@ -1,13 +1,15 @@
 package com.sample.dodo.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +30,12 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
         TextView toDoContents, dDay;
         ImageView currentState, importanceImage;
         int index;
-        int[] importanceImageArray = { R.drawable.ic_importance, R.drawable.ic_importance1, R.drawable.ic_importance2, R.drawable.ic_importance3 };
+
+//      TODO: use resource array
+        int[] importanceImageArray = {R.drawable.ic_importance, R.drawable.ic_importance1, R.drawable.ic_importance2, R.drawable.ic_importance3};
+        int[] stateColorArray = {R.color.state_blue, R.color.state_green, R.color.state_yellow, R.color.state_red};
+        int[] stateStringArray = {R.string.before_start, R.string.progressing, R.string.pause, R.string.completion};
+        String[] dialogString = {"수정", "삭제"};
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -41,16 +48,35 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    Log.d("Recyclerview", "position = "+ getAdapterPosition());
+                    new Thread(() -> {
+                        int currentStateNum = mData.get(index).getCurrentState();
+                        if(currentStateNum < 3) {
+                            currentStateNum += 1;
+                        } else {
+                            currentStateNum = 0;
+                        }
+                        mData.get(index).setCurrentState(currentStateNum);
+                        currentState.setColorFilter(Color.parseColor(Integer.toString(stateColorArray[currentStateNum])));
+                        Toast.makeText(v.getContext(), "현재 상태를 " + stateStringArray[currentStateNum] + " 변경합니다.", Toast.LENGTH_LONG).show();
+                    }).start();
                 }
             });
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    Log.d("Recyclerview", "position = "+ getAdapterPosition());
-                    return false;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setItems(dialogString, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if(which == 0) {
+
+                            } else {
+
+                            }
+                        }
+                    });
+                    return true;
                 }
             });
         }
@@ -59,7 +85,7 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
             index = position;
             toDoContents.setText(todo.getContents());
             dDay.setText(todo.getDeadline().toString());
-            currentState.setColorFilter(Color.parseColor(todo.getCurrentState()));
+            currentState.setColorFilter(Color.parseColor(Integer.toString(stateColorArray[todo.getCurrentState()])));
             importanceImage.setImageResource(importanceImageArray[todo.getImportance()]);
         }
 
@@ -90,5 +116,10 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    public void setItem(List<ToDo> data) {
+        mData = data;
+        notifyDataSetChanged();
     }
 }

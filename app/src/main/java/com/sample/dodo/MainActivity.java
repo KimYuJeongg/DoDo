@@ -1,7 +1,9 @@
 package com.sample.dodo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -20,14 +22,12 @@ import com.sample.dodo.data.ToDo;
 import com.sample.dodo.data.ToDoDatabase;
 import com.sample.dodo.databinding.ActivityMainBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    ArrayList<String> list = new ArrayList<>();
     ToDoDatabase db;
 
     @Override
@@ -65,24 +65,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    void setList() {
-        list.add("시험공부");
-        list.add("장보기");
-        list.add("PT 신청하기");
-        list.add("기획하기");
-        list.add("방 청소하기");
-        list.add("샴푸 사기");
-        list.add("으아아");
-        list.add("으아dkdkdkd아");
-        list.add("으아아아아아아ㅏㅏㅏㅏㅏㅏㅏㅏ아");
-        list.add("으아ㄴ엉나ㅣ오아아아앙아");
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent = new Intent(MainActivity.this, AddActivity.class);
+
+        switch (item.getItemId()) {
+            case R.id.add:
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRecyclerViewAdapter.ViewHolder> {
 
-    private List<ToDo> mData = null;
+    private List<ToDo> items = null;
     private ToDoDatabase db;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,13 +49,13 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
                 @Override
                 public void onClick(View v) {
                     new Thread(() -> {
-                        int currentStateNum = mData.get(index).getCurrentState();
+                        int currentStateNum = items.get(index).getCurrentState();
                         if(currentStateNum < 3) {
                             currentStateNum += 1;
                         } else {
                             currentStateNum = 0;
                         }
-                        mData.get(index).setCurrentState(currentStateNum);
+                        items.get(index).setCurrentState(currentStateNum);
                         currentState.setColorFilter(Color.parseColor(Integer.toString(stateColorArray[currentStateNum])));
                         Toast.makeText(v.getContext(), "현재 상태를 " + stateStringArray[currentStateNum] + " 변경합니다.", Toast.LENGTH_LONG).show();
                     }).start();
@@ -110,16 +110,25 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
     @Override
     public void onBindViewHolder(@NonNull MainToDoRecyclerViewAdapter.ViewHolder holder, int position) {
 //        holder.toDoContents.setText(mData.get(position));
-        holder.onBind(mData.get(position), position);
+        holder.onBind(items.get(position), position);
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        if(items == null) {
+            return 0;
+        } else {
+            return items.size();
+        }
     }
 
+    public List<ToDo> getItems() {
+        return items;
+    }
+
+
     public void setItem(List<ToDo> data) {
-        mData = data;
+        items = data;
         notifyDataSetChanged();
     }
 }

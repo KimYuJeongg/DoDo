@@ -10,6 +10,10 @@ import java.sql.Time;
 @Entity
 public class ToDo {
 
+    public ToDo(String contents) {
+        this.contents = contents;
+    }
+
     @PrimaryKey(autoGenerate = true)
     public int id;
 

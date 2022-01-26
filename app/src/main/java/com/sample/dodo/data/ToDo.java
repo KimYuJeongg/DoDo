@@ -5,14 +5,14 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.sql.Time;
-
 @Entity
 public class ToDo {
-
-    public ToDo(String contents, int importance) {
+//TODO: Migration
+    public ToDo(String contents, int importance, String deadline, String alarmTime) {
         this.contents = contents;
         this.importance = importance;
+        this.deadline = deadline;
+        this.alarmTime = alarmTime;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -22,28 +22,32 @@ public class ToDo {
     @NonNull
     public String contents;
 
-    @ColumnInfo(name = "deadline")
-    public Long deadline;
-
     @ColumnInfo(name = "importance")
     public int importance;
 
-    @ColumnInfo(name = "currentState")
-    public int currentState;
+    @ColumnInfo(name = "deadline")
+    public String deadline;
 
     @ColumnInfo(name = "alarm_time")
-    public Long alarmTime;
+    public String alarmTime;
+
+    @ColumnInfo(name = "currentState")
+    public int currentState;
 
     public String getContents() {
         return contents;
     }
 
-    public Long getDeadline() {
+    public int getImportance() {
+        return importance;
+    }
+
+    public String getDeadline() {
         return deadline;
     }
 
-    public int getImportance() {
-        return importance;
+    public String getAlarmTime() {
+        return alarmTime;
     }
 
     public int getCurrentState() {
@@ -54,7 +58,20 @@ public class ToDo {
         this.contents = contents;
     }
 
+    public void setImportance(int importance) {
+        this.importance = importance;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
+
+    public void setAlarmTime(String alarmTime) {
+        this.alarmTime = alarmTime;
+    }
+
     public void setCurrentState(int currentState) {
         this.currentState = currentState;
     }
+
 }

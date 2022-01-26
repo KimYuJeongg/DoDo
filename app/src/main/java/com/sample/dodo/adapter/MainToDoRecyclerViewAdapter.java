@@ -18,6 +18,10 @@ import com.sample.dodo.R;
 import com.sample.dodo.data.ToDo;
 import com.sample.dodo.data.ToDoDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRecyclerViewAdapter.ViewHolder> {
@@ -30,8 +34,9 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
         TextView toDoContents, dDay;
         ImageView currentState, importanceImage;
         int index;
+        Calendar today = Calendar.getInstance();
 
-//      TODO: use resource array
+        //      TODO: use resource array
         int[] importanceImageArray = {R.drawable.ic_importance, R.drawable.ic_importance1, R.drawable.ic_importance2, R.drawable.ic_importance3};
         int[] stateColorArray = {R.color.state_blue, R.color.state_green, R.color.state_yellow, R.color.state_red};
         int[] stateStringArray = {R.string.before_start, R.string.progressing, R.string.pause, R.string.complete};
@@ -45,12 +50,14 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
             currentState = itemView.findViewById(R.id.currentState);
             importanceImage = itemView.findViewById(R.id.importanceImage);
 
+            today.setTime(new Date());
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     new Thread(() -> {
                         int currentStateNum = items.get(index).getCurrentState();
-                        if(currentStateNum < 3) {
+                        if (currentStateNum < 3) {
                             currentStateNum += 1;
                         } else {
                             currentStateNum = 0;
@@ -69,7 +76,7 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
                     builder.setItems(dialogString, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if(which == 0) {
+                            if (which == 0) {
 
                             } else {
 
@@ -84,12 +91,22 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
         public void onBind(ToDo todo, int position) {
             index = position;
             toDoContents.setText(todo.getContents());
-//            TODO: if(dDay != null) setTextSize(17)
-//            dDay.setText(todo.getDeadline().toString());
+            if (todo.getDeadline() != null) {
+                dDay.setTextSize(17);
+                try {
+                    Date date = new SimpleDateFormat("yyyy.MM.dd").parse(todo.getDeadline());
+                    Calendar deadline = Calendar.getInstance();
+                    deadline.setTime(date);
+                    long diffSec = (deadline.getTimeInMillis() - today.getTimeInMillis()) / 1000;
+                    long diffDays = diffSec / (24 * 60 * 60);
+                    dDay.setText("D - " + diffDays);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
 //            currentState.setColorFilter((stateColorArray[todo.getCurrentState()]));
             importanceImage.setImageResource(importanceImageArray[todo.getImportance()]);
         }
-
     }
 
     public MainToDoRecyclerViewAdapter(ToDoDatabase db) {
@@ -116,7 +133,7 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
 
     @Override
     public int getItemCount() {
-        if(items == null) {
+        if (items == null) {
             return 0;
         } else {
             return items.size();

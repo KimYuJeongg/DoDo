@@ -1,6 +1,7 @@
 package com.sample.dodo;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,19 +20,23 @@ import androidx.core.content.ContextCompat;
 import com.sample.dodo.data.ToDo;
 import com.sample.dodo.data.ToDoDatabase;
 
+import java.util.Calendar;
+
 public class AddActivity extends AppCompatActivity {
 
     ImageButton backButton;
     Button completeButton, importance1, importance2, importance3;
     EditText toDoInput;
     LinearLayout alarmLayout;
-    ImageView timeIcon;
+    ImageView timeIcon, alarmIcon;
     Context context;
 
     ToDoDatabase db;
 
     boolean[] isSetImportance = {false, false, false};
     int importance = 0;
+    String deadline = null;
+    String alarmTime = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,7 @@ public class AddActivity extends AppCompatActivity {
         toDoInput = findViewById(R.id.toDoInput);
         alarmLayout = findViewById(R.id.alarmLayout);
         timeIcon = findViewById(R.id.timeIcon);
+        alarmIcon = findViewById(R.id.alarmIcon);
         importance1 = findViewById(R.id.importance1);
         importance2 = findViewById(R.id.importance2);
         importance3 = findViewById(R.id.importance3);
@@ -53,12 +60,12 @@ public class AddActivity extends AppCompatActivity {
     public void completeWriting(View view) {
         if (!(toDoInput.getText().toString().isEmpty())) {
             new Thread(() -> {
-                ToDo todo = new ToDo(toDoInput.getText().toString(), importance);
+                ToDo todo = new ToDo(toDoInput.getText().toString(), importance, deadline, alarmTime);
                 db.toDoDao().insert(todo);
                 finish();
             }).start();
         } else {
-            Toast.makeText(getApplicationContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -119,22 +126,27 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void setDeadLine(View view) {
-//        TODO: DatePicker Dialog
-//        TODO: alarmLayout set visibility to visible
-//        TODO: set icon color
-        DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        Calendar calendar = Calendar.getInstance();
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
+                deadline = year + "." + (month + 1) + "." + dayOfMonth;
+                timeIcon.setColorFilter(getResources().getColor(R.color.state_blue));
+                alarmLayout.setVisibility(View.VISIBLE);
             }
-        }, 2022, 1, 25);
-
-        timeIcon.setColorFilter(R.color.state_blue);
-        alarmLayout.setVisibility(View.VISIBLE);
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
     }
 
     public void setAlarm(View view) {
-//        TODO: TimePicker Dialog
-//        TODO: set icon color
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                alarmTime = i + ":" + i1;
+                alarmIcon.setColorFilter(getResources().getColor(R.color.state_blue));
+            }
+        }, 0, 0, false);
+        timePickerDialog.show();
     }
 }

@@ -16,4 +16,7 @@
     <color name="state_green">#8CD87D</color>
     <color name="state_yellow">#F8F172</color>
     <color name="state_red">#FF5E5E</color>
+    <color name="importance1">#8DB1FF</color>
+    <color name="importance2">#4D85FF</color>
+    <color name="importance3">#1761FF</color>
 </resources>

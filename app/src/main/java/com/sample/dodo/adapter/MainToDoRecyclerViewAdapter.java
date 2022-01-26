@@ -34,7 +34,7 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
 //      TODO: use resource array
         int[] importanceImageArray = {R.drawable.ic_importance, R.drawable.ic_importance1, R.drawable.ic_importance2, R.drawable.ic_importance3};
         int[] stateColorArray = {R.color.state_blue, R.color.state_green, R.color.state_yellow, R.color.state_red};
-        int[] stateStringArray = {R.string.before_start, R.string.progressing, R.string.pause, R.string.completion};
+        int[] stateStringArray = {R.string.before_start, R.string.progressing, R.string.pause, R.string.complete};
         String[] dialogString = {"수정", "삭제"};
 
         public ViewHolder(@NonNull View itemView) {
@@ -84,8 +84,9 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
         public void onBind(ToDo todo, int position) {
             index = position;
             toDoContents.setText(todo.getContents());
-            dDay.setText(todo.getDeadline().toString());
-            currentState.setColorFilter(Color.parseColor(Integer.toString(stateColorArray[todo.getCurrentState()])));
+//            TODO: if(dDay != null) setTextSize(17)
+//            dDay.setText(todo.getDeadline().toString());
+//            currentState.setColorFilter((stateColorArray[todo.getCurrentState()]));
             importanceImage.setImageResource(importanceImageArray[todo.getImportance()]);
         }
 

@@ -10,8 +10,9 @@ import java.sql.Time;
 @Entity
 public class ToDo {
 
-    public ToDo(String contents) {
+    public ToDo(String contents, int importance) {
         this.contents = contents;
+        this.importance = importance;
     }
 
     @PrimaryKey(autoGenerate = true)

@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="70dp">
 
-
     <ImageView
         android:id="@+id/currentState"
         android:layout_width="20dp"
@@ -19,25 +18,25 @@
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="20dp"
-        android:text="시험공부" />
+        android:text="no content" />
 
     <TextView
         android:id="@+id/dDay"
-        android:layout_width="wrap_content"
+        android:layout_width="55dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@id/currentState"
-        android:text="D - 7"
-        android:textSize="18sp" />
+        android:layout_marginRight="10dp"
+        android:text="free"
+        android:textAlignment="center" />
 
     <ImageView
         android:id="@+id/importanceImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="5dp"
         android:layout_toStartOf="@id/dDay"
         app:srcCompat="@drawable/ic_importance" />
-
 
 </RelativeLayout>

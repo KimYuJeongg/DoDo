@@ -1,8 +1,11 @@
 package com.sample.dodo;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +23,10 @@ import androidx.core.content.ContextCompat;
 import com.sample.dodo.data.ToDo;
 import com.sample.dodo.data.ToDoDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -32,6 +38,7 @@ public class AddActivity extends AppCompatActivity {
     Context context;
 
     ToDoDatabase db;
+    AlarmManager alarmManager;
 
     boolean[] isSetImportance = {false, false, false};
     int importance = 0;
@@ -56,6 +63,7 @@ public class AddActivity extends AppCompatActivity {
         importance3 = findViewById(R.id.importance3);
 
         db = ToDoDatabase.getInstance(this);
+        alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
     }
 
     public void completeWriting(View view) {
@@ -63,6 +71,9 @@ public class AddActivity extends AppCompatActivity {
             new Thread(() -> {
                 ToDo todo = new ToDo(toDoInput.getText().toString(), importance, deadline, alarmTime, currentState);
                 db.toDoDao().insert(todo);
+                if(deadline != null && alarmTime != null) {
+                    setPushNotification();
+                }
                 finish();
             }).start();
         } else {
@@ -138,6 +149,8 @@ public class AddActivity extends AppCompatActivity {
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
+        datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.importance1));
+        datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.importance1));
     }
 
     public void setAlarm(View view) {
@@ -145,10 +158,32 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 alarmTime = i + ":" + i1;
+                System.out.println(alarmTime);
                 alarmIcon.setColorFilter(getResources().getColor(R.color.state_blue));
             }
-        }, 0, 0, false);
+        }, 0, 0, true);
         timePickerDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
         timePickerDialog.show();
+    }
+
+    public void setPushNotification() {
+        Intent receiverIntent = new Intent(AddActivity.this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(AddActivity.this, 0, receiverIntent, 0);
+
+        receiverIntent.putExtra("내용", toDoInput.getText());
+        String getTime = deadline + " " + alarmTime + ":00";
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+        Date notificationTime = null;
+        try {
+            notificationTime = dateFormat.parse(getTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(notificationTime);
+
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(),pendingIntent);
     }
 }

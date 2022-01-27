@@ -2,6 +2,8 @@ package com.sample.dodo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -51,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
 
         db = ToDoDatabase.getInstance(this);
         RecyclerView recyclerView = findViewById(R.id.mainToDoRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
-        adapter = new MainToDoRecyclerViewAdapter(db) ;
-        recyclerView.setAdapter(adapter) ;
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new MainToDoRecyclerViewAdapter(db);
+        recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), 1));
 
         db.toDoDao().getAll().observe(this, new Observer<List<ToDo>>() {
@@ -79,8 +81,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.filter:
-                List<ToDo> toDos = db.toDoDao().getAllByDate();
-                adapter.setItem(toDos);
+                new Thread(() -> {
+                    List<ToDo> toDos = db.toDoDao().getAllByDate();
+                    adapter.setItem(toDos);
+                }).start();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -92,4 +96,5 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 }

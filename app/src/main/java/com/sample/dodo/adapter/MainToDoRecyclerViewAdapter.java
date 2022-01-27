@@ -3,7 +3,8 @@ package com.sample.dodo.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import com.sample.dodo.data.ToDoDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -38,8 +38,8 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
 
         //      TODO: use resource array
         int[] importanceImageArray = {R.drawable.ic_importance, R.drawable.ic_importance1, R.drawable.ic_importance2, R.drawable.ic_importance3};
-        int[] stateColorArray = {R.color.state_blue, R.color.state_green, R.color.state_yellow, R.color.state_red};
-        int[] stateStringArray = {R.string.before_start, R.string.progressing, R.string.pause, R.string.complete};
+        int[] stateImageColorArray = {R.drawable.state1, R.drawable.state2, R.drawable.state3, R.drawable.state4};
+        String[] stateStringArray = {"시작 전으로", "진행 중으로", "중지로", "완료로"};
         String[] dialogString = {"수정", "삭제"};
 
         public ViewHolder(@NonNull View itemView) {
@@ -62,8 +62,16 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
                             currentStateNum = 0;
                         }
                         items.get(index).setCurrentState(currentStateNum);
-                        currentState.setColorFilter(Color.parseColor(Integer.toString(stateColorArray[currentStateNum])));
-                        Toast.makeText(v.getContext(), "현재 상태를 " + stateStringArray[currentStateNum] + " 변경합니다.", Toast.LENGTH_LONG).show();
+                        currentState.setImageResource(stateImageColorArray[currentStateNum]);
+                        final int stateIndex = currentStateNum;
+
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(v.getContext(), "현재 상태를 " + (stateStringArray[stateIndex]) + " 변경합니다.", Toast.LENGTH_LONG).show();
+                            }
+                        }, 0);
                     }).start();
                 }
             });
@@ -75,13 +83,25 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
                     builder.setItems(dialogString, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if (which == 0) {
-
-                            } else {
-
-                            }
+                            new Thread(() -> {
+                                if (which == 0) {
+                                    System.out.println("===============수정=================");
+                                } else {
+                                    System.out.println("===============삭제=================");
+                                    db.toDoDao().delete(items.get(index));
+//                                    Toast.makeText(v.getContext(), "삭제되었습니다.", Toast.LENGTH_LONG).show();
+                                }
+//                                Handler handler = new Handler(Looper.getMainLooper());
+//                                handler.postDelayed(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        Toast.makeText(v.getContext(), "", Toast.LENGTH_LONG).show();
+//                                    }
+//                                }, 0);
+                            }).start();
                         }
                     });
+                    builder.show();
                     return true;
                 }
             });
@@ -98,7 +118,7 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
                     long diffSec = (deadline.getTime() - today.getTime()) / 1000;
                     long diffDays = diffSec / (24 * 60 * 60);
 
-                    if(diffDays == 0) {
+                    if (diffDays == 0) {
                         dDay.setText("Today");
                     } else {
                         dDay.setText("D - " + diffDays);
@@ -107,9 +127,10 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
                     e.printStackTrace();
                 }
             }
-            currentState.setColorFilter((stateColorArray[todo.getCurrentState()]));
+            currentState.setImageResource(stateImageColorArray[todo.getCurrentState()]);
             importanceImage.setImageResource(importanceImageArray[todo.getImportance()]);
         }
+
     }
 
     public MainToDoRecyclerViewAdapter(ToDoDatabase db) {
@@ -130,7 +151,6 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
 
     @Override
     public void onBindViewHolder(@NonNull MainToDoRecyclerViewAdapter.ViewHolder holder, int position) {
-//        holder.toDoContents.setText(mData.get(position));
         holder.onBind(items.get(position), position);
     }
 
@@ -146,7 +166,6 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
     public List<ToDo> getItems() {
         return items;
     }
-
 
     public void setItem(List<ToDo> data) {
         items = data;

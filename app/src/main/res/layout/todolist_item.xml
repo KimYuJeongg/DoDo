@@ -9,7 +9,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignParentRight="true"
-        app:srcCompat="@drawable/ic_state" />
+        app:srcCompat="@drawable/state1" />
 
     <TextView
         android:id="@+id/toDoContentsItem"

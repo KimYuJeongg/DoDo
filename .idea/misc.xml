@@ -3,24 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/DoDo/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3078125" />
+        <entry key="..\:/DoDo/app/src/main/res/drawable/background.xml" value="0.38229166666666664" />
+        <entry key="..\:/DoDo/app/src/main/res/drawable/header_border.xml" value="0.38229166666666664" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_add.xml" value="0.38229166666666664" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_alarm.xml" value="0.38229166666666664" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_calendar.xml" value="0.38229166666666664" />
+        <entry key="..\:/DoDo/app/src/main/res/drawable/ic_circle.xml" value="0.38229166666666664" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_day_24.xml" value="0.38229166666666664" />
-        <entry key="..\:/DoDo/app/src/main/res/drawable/ic_filter.xml" value="0.35052083333333334" />
-        <entry key="..\:/DoDo/app/src/main/res/drawable/ic_filters.xml" value="0.35052083333333334" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_fixed.xml" value="0.38229166666666664" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_importance.xml" value="0.346875" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_importance1.xml" value="0.346875" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_importance2.xml" value="0.346875" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_importance3.xml" value="0.346875" />
+        <entry key="..\:/DoDo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.30052083333333335" />
+        <entry key="..\:/DoDo/app/src/main/res/drawable/ic_medal.xml" value="0.3072916666666667" />
+        <entry key="..\:/DoDo/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.3072916666666667" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_time.xml" value="0.346875" />
+        <entry key="..\:/DoDo/app/src/main/res/drawable/ic_trophy.xml" value="0.3072916666666667" />
+        <entry key="..\:/DoDo/app/src/main/res/drawable/navigation_drawer_icon_style.xml" value="0.38229166666666664" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/resource.xml" value="0.38229166666666664" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/side_nav_bar.xml" value="0.346875" />
         <entry key="..\:/DoDo/app/src/main/res/font/font.xml" value="0.3963541666666667" />
         <entry key="..\:/DoDo/app/src/main/res/layout/activity_add.xml" value="0.33" />
         <entry key="..\:/DoDo/app/src/main/res/layout/activity_main.xml" value="0.2708333333333333" />
-        <entry key="..\:/DoDo/app/src/main/res/layout/app_bar_main.xml" value="0.2708333333333333" />
+        <entry key="..\:/DoDo/app/src/main/res/layout/app_bar_main.xml" value="0.5" />
         <entry key="..\:/DoDo/app/src/main/res/layout/content_main.xml" value="0.33" />
         <entry key="..\:/DoDo/app/src/main/res/layout/dialog_deadline.xml" value="0.3307291666666667" />
         <entry key="..\:/DoDo/app/src/main/res/layout/fragment_gallery.xml" value="0.36614583333333334" />
@@ -29,7 +36,9 @@
         <entry key="..\:/DoDo/app/src/main/res/layout/nav_header_main.xml" value="0.36614583333333334" />
         <entry key="..\:/DoDo/app/src/main/res/layout/todolist_item.xml" value="0.33" />
         <entry key="..\:/DoDo/app/src/main/res/menu/activity_main_drawer.xml" value="0.36614583333333334" />
-        <entry key="..\:/DoDo/app/src/main/res/menu/main.xml" value="0.33" />
+        <entry key="..\:/DoDo/app/src/main/res/menu/main.xml" value="0.36614583333333334" />
+        <entry key="..\:/DoDo/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.30052083333333335" />
+        <entry key="..\:/DoDo/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3078125" />
       </map>
     </option>
   </component>

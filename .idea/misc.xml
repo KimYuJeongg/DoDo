@@ -7,6 +7,8 @@
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_alarm.xml" value="0.38229166666666664" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_calendar.xml" value="0.38229166666666664" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_day_24.xml" value="0.38229166666666664" />
+        <entry key="..\:/DoDo/app/src/main/res/drawable/ic_filter.xml" value="0.35052083333333334" />
+        <entry key="..\:/DoDo/app/src/main/res/drawable/ic_filters.xml" value="0.35052083333333334" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_fixed.xml" value="0.38229166666666664" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_importance.xml" value="0.346875" />
         <entry key="..\:/DoDo/app/src/main/res/drawable/ic_importance1.xml" value="0.346875" />
@@ -27,7 +29,7 @@
         <entry key="..\:/DoDo/app/src/main/res/layout/nav_header_main.xml" value="0.36614583333333334" />
         <entry key="..\:/DoDo/app/src/main/res/layout/todolist_item.xml" value="0.33" />
         <entry key="..\:/DoDo/app/src/main/res/menu/activity_main_drawer.xml" value="0.36614583333333334" />
-        <entry key="..\:/DoDo/app/src/main/res/menu/main.xml" value="0.36614583333333334" />
+        <entry key="..\:/DoDo/app/src/main/res/menu/main.xml" value="0.33" />
       </map>
     </option>
   </component>

@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    MainToDoRecyclerViewAdapter adapter;
     ToDoDatabase db;
 
     @Override
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         db = ToDoDatabase.getInstance(this);
         RecyclerView recyclerView = findViewById(R.id.mainToDoRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
-        MainToDoRecyclerViewAdapter adapter = new MainToDoRecyclerViewAdapter(db) ;
+        adapter = new MainToDoRecyclerViewAdapter(db) ;
         recyclerView.setAdapter(adapter) ;
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), 1));
 
@@ -72,12 +73,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = new Intent(MainActivity.this, AddActivity.class);
-
         switch (item.getItemId()) {
             case R.id.add:
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.filter:
+                List<ToDo> toDos = db.toDoDao().getAllByDate();
+                adapter.setItem(toDos);
             default:
                 return super.onOptionsItemSelected(item);
         }

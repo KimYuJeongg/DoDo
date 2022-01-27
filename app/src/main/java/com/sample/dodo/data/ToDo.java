@@ -8,11 +8,12 @@ import androidx.room.PrimaryKey;
 @Entity
 public class ToDo {
 //TODO: Migration
-    public ToDo(String contents, int importance, String deadline, String alarmTime) {
+    public ToDo(String contents, int importance, String deadline, String alarmTime, int currentState) {
         this.contents = contents;
         this.importance = importance;
         this.deadline = deadline;
         this.alarmTime = alarmTime;
+        this.currentState = currentState;
     }
 
     @PrimaryKey(autoGenerate = true)

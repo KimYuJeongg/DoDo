@@ -37,6 +37,7 @@ public class AddActivity extends AppCompatActivity {
     int importance = 0;
     String deadline = null;
     String alarmTime = null;
+    int currentState = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +59,9 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void completeWriting(View view) {
-        if (!(toDoInput.getText().toString().isEmpty())) {
+        if (!(toDoInput.getText().toString().trim().isEmpty())) {
             new Thread(() -> {
-                ToDo todo = new ToDo(toDoInput.getText().toString(), importance, deadline, alarmTime);
+                ToDo todo = new ToDo(toDoInput.getText().toString(), importance, deadline, alarmTime, currentState);
                 db.toDoDao().insert(todo);
                 finish();
             }).start();
@@ -140,13 +141,14 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void setAlarm(View view) {
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 alarmTime = i + ":" + i1;
                 alarmIcon.setColorFilter(getResources().getColor(R.color.state_blue));
             }
         }, 0, 0, false);
+        timePickerDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
         timePickerDialog.show();
     }
 }

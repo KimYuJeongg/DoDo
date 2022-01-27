@@ -34,7 +34,7 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
         TextView toDoContents, dDay;
         ImageView currentState, importanceImage;
         int index;
-        Calendar today = Calendar.getInstance();
+        Date getToday;
 
         //      TODO: use resource array
         int[] importanceImageArray = {R.drawable.ic_importance, R.drawable.ic_importance1, R.drawable.ic_importance2, R.drawable.ic_importance3};
@@ -49,8 +49,7 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
             dDay = itemView.findViewById(R.id.dDay);
             currentState = itemView.findViewById(R.id.currentState);
             importanceImage = itemView.findViewById(R.id.importanceImage);
-
-            today.setTime(new Date());
+            getToday = new Date();
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -92,19 +91,23 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
             index = position;
             toDoContents.setText(todo.getContents());
             if (todo.getDeadline() != null) {
-                dDay.setTextSize(17);
                 try {
-                    Date date = new SimpleDateFormat("yyyy.MM.dd").parse(todo.getDeadline());
-                    Calendar deadline = Calendar.getInstance();
-                    deadline.setTime(date);
-                    long diffSec = (deadline.getTimeInMillis() - today.getTimeInMillis()) / 1000;
+                    String format = new SimpleDateFormat("yyyy.MM.dd").format(getToday);
+                    Date today = new SimpleDateFormat("yyyy.MM.dd").parse(format);
+                    Date deadline = new SimpleDateFormat("yyyy.MM.dd").parse(todo.getDeadline());
+                    long diffSec = (deadline.getTime() - today.getTime()) / 1000;
                     long diffDays = diffSec / (24 * 60 * 60);
-                    dDay.setText("D - " + diffDays);
+
+                    if(diffDays == 0) {
+                        dDay.setText("Today");
+                    } else {
+                        dDay.setText("D - " + diffDays);
+                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
-//            currentState.setColorFilter((stateColorArray[todo.getCurrentState()]));
+            currentState.setColorFilter((stateColorArray[todo.getCurrentState()]));
             importanceImage.setImageResource(importanceImageArray[todo.getImportance()]);
         }
     }

@@ -12,7 +12,7 @@ import java.util.List;
 @Dao
 public interface ToDoDao {
 
-    @Query("SELECT * FROM todo ORDER BY importance DESC, CASE WHEN deadline IS NULL THEN 1 ELSE 0 END")
+    @Query("SELECT * FROM todo ORDER BY importance DESC, deadline IS NULL ASC")
     LiveData<List<ToDo>> getAll();
 
     @Query("SELECT * FROM todo ORDER BY CASE WHEN deadline IS NULL THEN 1 ELSE 0 END")

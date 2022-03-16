@@ -85,19 +85,9 @@ public class MainToDoRecyclerViewAdapter extends RecyclerView.Adapter<MainToDoRe
                         public void onClick(DialogInterface dialog, int which) {
                             new Thread(() -> {
                                 if (which == 0) {
-                                    System.out.println("===============수정=================");
                                 } else {
-                                    System.out.println("===============삭제=================");
                                     db.toDoDao().delete(items.get(index));
-//                                    Toast.makeText(v.getContext(), "삭제되었습니다.", Toast.LENGTH_LONG).show();
                                 }
-//                                Handler handler = new Handler(Looper.getMainLooper());
-//                                handler.postDelayed(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        Toast.makeText(v.getContext(), "", Toast.LENGTH_LONG).show();
-//                                    }
-//                                }, 0);
                             }).start();
                         }
                     });
